@@ -9,7 +9,7 @@
       :fetchSearch="fetchSearch"
     />
     <results
-      :results="searchResults"
+      :searchResults="searchResults"
     />
   </main>
 
