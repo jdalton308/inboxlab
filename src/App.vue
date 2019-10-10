@@ -1,11 +1,18 @@
 <template>
 
-<div id="app">
-  <input
-    type="text"
-    name="search"
-    v-model="searchVal"
-  >
+<div id="app" class="app">
+
+  <sidebar />
+
+  <main class="view-search">
+    <search-bar
+      :fetchSearch="fetchSearch"
+    />
+    <results
+      :results="searchResults"
+    />
+  </main>
+
 </div>
 
 </template>
@@ -16,25 +23,25 @@
 
 import { fetchSearch } from './utils/requests';
 
+import Sidebar from './components/sidebar.vue';
+import SearchBar from './components/search-bar.vue';
+import Results from './components/results.vue';
+
 
 export default {
   name: 'app',
   components: {
+    Sidebar,
+    SearchBar,
+    Results,
   },
 
 //----
 
   data: () => ({
     searchVal: '',
+    searchResults: null,
   }),
-
-//----
-
-  watch: {
-    searchVal() {
-      this.fetchSearch();
-    },
-  },
 
 //----
 
@@ -42,9 +49,9 @@ export default {
     fetchSearch(e) {
       console.log('searching: ', this.searchVal);
       fetchSearch(this.searchVal)
-        .then(rawResp => rawResp.json())
         .then(resp => {
-          console.log('response recieved: ', resp);
+          console.log('response recieved:\n', resp);
+          this.searchResults = resp;
         })
     },
   },
@@ -56,13 +63,12 @@ export default {
 
 <style lang="scss">
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "./scss/app";
+
+
+main {
+  background-color: blue;
 }
+
 
 </style>
