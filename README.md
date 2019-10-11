@@ -1,29 +1,23 @@
-# inboxlab
+# Inboxlab Assessment
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+## Running locally
+
+To run locally, first install dependencies...
+```bash
+npm i
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+then start the development server
+```bash
+npm run dev
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## File Structure
+
+All project files are located with `/src`. Within `/src`, `main.js` bootstraps the Vue app, using `App.vue` as the parent component for the entire app. The few other components used within the app are located within `/src/components`.
+
+Styles are all written in Sass (.scss), and any styles specific to a component are located in that appropriate .vue file. Any shared styles or variables are found in `/src/scss/`.
+
+Shared functions are found `/src/utils/`.

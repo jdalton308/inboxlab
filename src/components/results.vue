@@ -2,25 +2,37 @@
 
 <div class="results">
 
-  <div
-    v-if="!searchResults.length"
-    class="no-results"
-  >
-    <h2>Search Spotify</h2>
-    <p>Find your favorite songs, artists, albums, podcasts, and playlists.</p>
-  </div>
+  <transition name="fade" mode="out-in">
+    <div
+      v-if="!searchResults.length"
+      key="no-results"
+      class="no-results"
+    >
+      <h2>Search Spotify</h2>
+      <p>Find your favorite songs, artists, albums, podcasts, and playlists.</p>
+    </div>
 
-  <div
-    v-else
-    class="result-sections"
-  >
-    <results-section
-      v-for="(results, name) in sortedResults"
-      :key="name"
-      :name="name"
-      :results="results"
-    />
-  </div>
+    <div
+      v-else-if="isLoading"
+      key="results-loading"
+      class="results-loading"
+    >
+      <h2>Loading...</h2>
+    </div>
+
+    <div
+      v-else
+      key="results"
+      class="result-sections"
+    >
+      <results-section
+        v-for="(results, name) in sortedResults"
+        :key="name"
+        :name="name"
+        :results="results"
+      />
+    </div>
+  </transition>
 
 </div>
 
@@ -42,7 +54,8 @@ export default {
 //----
 
   props: [
-    'searchResults'
+    'searchResults',
+    'isLoading',
   ],
 
 //----

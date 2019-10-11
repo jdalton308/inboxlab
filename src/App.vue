@@ -11,6 +11,7 @@
     />
     <results
       :searchResults="searchResults"
+      :isLoading="isLoading"
     />
   </main>
 
@@ -41,20 +42,23 @@ export default {
 
   data: () => ({
     searchResults: [],
+    isLoading: false,
   }),
 
 //----
 
   methods: {
     fetchSearch(val) {
-      console.log('searching: ', val);
+      this.isLoading = true;
+
       fetchSearch(val)
         .then(resp => {
-          console.log('results: ', resp);
           this.searchResults = resp.results;
+          this.isLoading = false;
         })
         .catch(err => {
           console.log('Error fetching results: ', err);
+          this.isLoading = false;
         })
     },
     resetResults() {
@@ -69,6 +73,7 @@ export default {
 
 <style lang="scss">
 
+@import "./scss/transitions";
 @import "./scss/app";
 
 
