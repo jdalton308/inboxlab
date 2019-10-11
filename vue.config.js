@@ -3,9 +3,9 @@ const path = require('path');
 
 
 module.exports = {
-  // devServer: {
-  //   https: true,
-  // },
+  devServer: {
+    https: true,
+  },
   css: {
     loaderOptions: {
       sass: {
