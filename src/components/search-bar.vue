@@ -22,6 +22,7 @@ export default {
 
   props: [
     'fetchSearch',
+    'resetResults',
   ],
 
 //----
@@ -34,7 +35,11 @@ export default {
 
   watch: {
     searchVal() {
-      this.fetchSearch();
+      if (this.searchVal) {
+        this.fetchSearch(this.searchVal);
+      } else {
+        this.resetResults();
+      }
     },
   },
 

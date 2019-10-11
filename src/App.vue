@@ -7,6 +7,7 @@
   <main class="view-search">
     <search-bar
       :fetchSearch="fetchSearch"
+      :resetResults="resetResults"
     />
     <results
       :searchResults="searchResults"
@@ -39,21 +40,26 @@ export default {
 //----
 
   data: () => ({
-    searchVal: '',
-    searchResults: null,
+    searchResults: [],
   }),
 
 //----
 
   methods: {
-    fetchSearch(e) {
-      console.log('searching: ', this.searchVal);
-      fetchSearch(this.searchVal)
+    fetchSearch(val) {
+      console.log('searching: ', val);
+      fetchSearch(val)
         .then(resp => {
-          console.log('response recieved:\n', resp);
-          this.searchResults = resp;
+          console.log('results: ', resp);
+          this.searchResults = resp.results;
+        })
+        .catch(err => {
+          console.log('Error fetching results: ', err);
         })
     },
+    resetResults() {
+      this.searchResults = [];
+    }
   },
 }
 
